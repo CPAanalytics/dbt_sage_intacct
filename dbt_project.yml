@@ -9,8 +9,8 @@ models:
     intermediate:
       +materialized: view
 vars:
-  sage_account_pass_through_columns: []
-  sage_gl_pass_through_columns: []
+  sage_account_pass_through_columns: ['departmentid', 'locationid']
+  sage_gl_pass_through_columns: ['departmentid', 'locationid']
   sage_intacct:
     gl_detail: "{{ ref('stg_sage_intacct__gl_detail') }}"
     gl_batch: "{{ ref('stg_sage_intacct__gl_batch') }}"
