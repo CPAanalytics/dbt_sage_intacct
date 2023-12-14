@@ -6,3 +6,4 @@ dbt_packages/
 env/
 package-lock.yml
 .idea/
+__local/

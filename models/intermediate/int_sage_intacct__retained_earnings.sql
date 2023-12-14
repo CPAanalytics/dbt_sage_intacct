@@ -1,6 +1,6 @@
 with general_ledger_by_period as (
     select *
-    from {{ ref('sage_intacct__general_ledger_by_period') }}
+    from {{ ref('general_ledger_by_period') }}
 ),
 
 retained_earnings_prep as (

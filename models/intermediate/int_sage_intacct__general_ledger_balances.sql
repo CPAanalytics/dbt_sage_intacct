@@ -1,11 +1,11 @@
 with general_ledger as (
     select *
-    from {{ ref('sage_intacct__general_ledger') }}
+    from {{ ref('general_ledger') }}
 ), 
 
 gl_accounting_periods as (
     select *
-    from {{ ref('int_sage_intacct__general_ledger_date_spine') }}
+    from {{ ref('int_general_ledger_date_spine') }}
 ), 
 
 

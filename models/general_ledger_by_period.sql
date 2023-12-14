@@ -1,7 +1,7 @@
 
 with general_ledger_balances as (
     select *
-    from {{ ref('int_sage_intacct__general_ledger_balances') }}
+    from {{ ref('int_general_ledger_balances') }}
 ), 
 
 final as (
