@@ -2,14 +2,14 @@
 version: 2
 
 models:
-  - name: int_general_ledger_date_spine
+  - name: int_sage_intacct__general_ledger_date_spine
     description: >
       Creates a date spine by month with the first date being the minimum entry date from the general ledger
       model and the last date being one month after the last entry date from the general ledger model.
-  - name: int_general_ledger_balances
+  - name: int_sage_intacct__general_ledger_balances
     description: >
       Aggregates general ledger account level transactions per month into a period_beginning_balance, period_ending_balance, and period_net_change 
-      through the int_general_ledger_date_spine model. Further, balances are only applied to balance
+      through the int_sage_intacct__general_ledger_date_spine model. Further, balances are only applied to balance
       sheet accounts. Income statement accounts do not have a persisting balance, rather a period net change. Please note, a period equates to one month.
   - name: int_sage_intacct__account_classifications
     description: >
@@ -21,7 +21,7 @@ models:
   - name: int_sage_intacct__active_gl_detail
     description: Joins the gl_batch staging model to the gl_detail model in order to properly filter out any soft deleted transactions before being used in the General Ledger and other downstream models.
 
-  - name: ap_ar_enhanced
+  - name: sage_intacct__ap_ar_enhanced
     description: >
       All transactions for each bill or invoice with their associated accounting period and due dates. 
       Includes additional detail regarding the customer, location, department, vendor, and account. 
@@ -99,7 +99,7 @@ models:
       - name: record_id
         description: ID of invoice or bill. Maps to GL_DETAIL.RECORDID, which has all the records belonging to that invoice.
 
-  - name: general_ledger
+  - name: sage_intacct__general_ledger
     description: >
       Records all transactions from Sage general ledger. Additionally adds category, classification, and account type.
     columns:
@@ -175,7 +175,7 @@ models:
       - name: account_type
         description: Income statement or balance sheet
 
-  - name: general_ledger_by_period 
+  - name: sage_intacct__general_ledger_by_period 
     description: >
       Table containing the beginning balance, ending balance, and net change of the dollar amount for each month and for each account, 
       category, and classification. This table can be used to generate a balance sheet and profit & loss (income statement) for your business based 
@@ -220,7 +220,7 @@ models:
       - name: period_ending_amount
         description: The cumulative amount at the end of the period
 
-  - name: profit_and_loss 
+  - name: sage_intacct__profit_and_loss 
     description: >
       Records amounts by account, category, and classification for all profit & loss (income statement) type transactions.
     tests:
@@ -254,7 +254,7 @@ models:
       - name: amount      
         description: Total amount for that month, for income statement transactions. The period net change
 
-  - name: balance_sheet 
+  - name: sage_intacct__balance_sheet 
     description: >
       Records amounts by account, category, and classification for all balance_sheet type transactions.
     tests:

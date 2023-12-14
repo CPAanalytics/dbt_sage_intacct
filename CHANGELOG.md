@@ -7,11 +7,11 @@
 
 ## Bug Fixes
 - Added a new `int_sage_intacct__active_gl_detail` model. This model properly filters out any soft deleted GL Detail records by joining on the GL Batch staging model which contains the reference to if the transaction was deleted or not. Please note that this may result in fewer transactions in your downstream models due the removal of deleted transactions.
-- While this package still does not fully support multi-currency, a bugfix was applied in the `int_general_ledger_balances` model to properly join on the `currency` field so duplicates would not be introduced in the end models.
+- While this package still does not fully support multi-currency, a bugfix was applied in the `int_sage_intacct__general_ledger_balances` model to properly join on the `currency` field so duplicates would not be introduced in the end models.
 - In addition to the above, the following combination of column uniqueness tests were updated to take `currency` into consideration:
-    - `general_ledger_by_period`
-    - `profit_and_loss`
-    - `balance_sheet`
+    - `sage_intacct__general_ledger_by_period`
+    - `sage_intacct__profit_and_loss`
+    - `sage_intacct__balance_sheet`
 
 ## Under the Hood
 - Updated Maintainer PR Template
@@ -20,7 +20,7 @@
 # dbt_sage_intacct v0.2.2
 
 ## Add Null to Coalesce clause:
-- The variables `sage_intacct__using_bills` and `sage_intacct__using_invoices` are used in coalesce statements in the `ap_ar_enhanced` model. In the case where 1 is true and the other is false, the model fails for some warehouses. This is because in some warehouses like Snowflake, the coalesce clause is unable to only take 1 argument. Therefore, as a fix, this PR explicitly adds a null as a third argument. That way, for this scenario, there will still be 2 arguments. ([PR #17](https://github.com/fivetran/dbt_sage_intacct/pull/17))
+- The variables `sage_intacct__using_bills` and `sage_intacct__using_invoices` are used in coalesce statements in the `sage_intacct__ap_ar_enhanced` model. In the case where 1 is true and the other is false, the model fails for some warehouses. This is because in some warehouses like Snowflake, the coalesce clause is unable to only take 1 argument. Therefore, as a fix, this PR explicitly adds a null as a third argument. That way, for this scenario, there will still be 2 arguments. ([PR #17](https://github.com/fivetran/dbt_sage_intacct/pull/17))
 
  ## Under the Hood:
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
